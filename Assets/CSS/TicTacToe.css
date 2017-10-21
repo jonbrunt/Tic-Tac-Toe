@@ -1,0 +1,119 @@
+body {
+	max-width: 1600px;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background-color: #2a2a2a;
+	text-align: center;
+	font-family: 'Baloo Chettan', cursive;
+	color: #ffffff;
+}
+
+h1 {
+	padding: 0 20px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	line-height: 50px;
+	letter-spacing: 1.5px;
+	font-size: 4em;
+}
+
+/*h3 {
+	padding: 0 20px;
+	font-size: 1.5em;
+	margin-top: 10px;
+	letter-spacing: 1.5px;
+}*/
+
+table {
+	margin: 50px auto 35px;
+	border-collapse: collapse;
+	font-size: 65px;;
+}
+
+td {
+	width: 100px;
+	height: 100px;
+	vertical-align: middle;
+	border: 2px solid #ffffff;
+}
+
+td:hover {
+	cursor: pointer;
+}
+
+tr:first-child td {
+	border-top: 0;
+}
+
+tr:last-child td {
+	border-bottom: 0;
+}
+
+td:first-child {
+	border-left: 0;
+}
+
+td:last-child {
+	border-right: 0;
+}
+
+h2 {
+	display: none;
+	margin-top: 25px;
+	font-size: 3em;
+}
+
+button {
+	padding: 10px 20px;
+	border: none;
+	border-radius: 10px;
+	font-family: 'Baloo Chettan', cursive;
+	font-size: 1em;
+	font-weight: 600;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+#o {
+	margin-left: 20px;
+}
+
+#x {
+	margin-right: 20px;
+}
+
+#reset {
+	display: none;
+}
+
+@media (max-width: 600px) {
+
+	h1 {
+		font-size: 2.8em;
+	}
+
+/*	h3 {
+		font-size: 1.05em;
+	}*/
+
+	table {
+		margin-top: 30px;
+		font-size: 55px;
+	}
+
+	td {
+		width: 85px;
+		height: 85px;
+	}
+
+	h2 {
+		font-size: 2.1em;
+	}
+
+}
