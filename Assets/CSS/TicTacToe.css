@@ -115,5 +115,8 @@ button:hover {
 	h2 {
 		font-size: 2.1em;
 	}
-
+	
+	button {
+		background-color: #dddddd;
+	}
 }
