@@ -15,7 +15,7 @@ function init() {
 }
 
 function assign() {
-	resetButton.addEventListener('click', function() {console.log('reset clicked'); reset();});
+	resetButton.addEventListener('click', function() {reset();});
 	const buttons = document.querySelectorAll('.buttons');
 	buttons.forEach(function(el) {
 		el.addEventListener('click', function() {
@@ -32,7 +32,6 @@ function assign() {
 }
 
 function reset() {
-	console.log('reset function');
 	user = '', machine = '', player = '', field = [...newField];
 	table.style.backgroundColor = '#2a2a2a';
 	banners.style.display = 'block';
@@ -53,11 +52,11 @@ function selectBlock(event) {
 	event.target.innerText = player;
 	field[event.target.id] = player;
 	blocks[event.target.id].removeEventListener('click', selectBlock);
+	console.log(field);
 	if (!checkWin(field, player, 'user', false) && !checkTie(field, false)) {machinePlays();}
 }
 
 function machinePlays() {
-	// let random = Math.floor(Math.random() * empty.length)
 	player = machine;
 	let x;
 	let empty = getEmpty(field);
@@ -65,12 +64,20 @@ function machinePlays() {
 		x = 4;
 	}	else if ((empty.length === 8) && (field[4] === user)) {
 		x = 0;
-	}	else {
+	}	else if (empty.length === 6 && checkDiagonals(1) !== false) {
+		x = checkDiagonals(1);
+	} 	else if (empty.length === 6 && checkDiagonals(2) !== false) {
+		x = checkDiagonals(2);
+	} 	else {
 		x = (computeMove(field, 0).index);
+		if (!terminal(x) && (typeof checkRowsColumns(field) === 'number')) {
+			x = checkRowsColumns(field);
+		}
 	}
 	field[x] = player;
 	blocks[x].innerText = player;
 	blocks[x].removeEventListener('click', selectBlock);
+	console.log(field);
 	if (!checkWin(field, player, 'machine', false)) {checkTie(field, false);}
 }
 
@@ -80,6 +87,15 @@ function getEmpty(testField) {
 		if (typeof el === 'number') {task.push(i);}
 	});
 	return(task);
+}
+
+function checkDiagonals(num) {
+	if (num === 1) {
+		if ((field[0] === user && field[8] === user) || (field[2] === user && field[6] === user)) return 3;
+	} else if (num === 2) {
+		if ((field [1] === user || field[7] === user) && (field[3] === user || field[5] === user)) return 4;
+	}
+	return false;
 }
 
 function computeMove(current, d) {
@@ -104,7 +120,6 @@ function computeMove(current, d) {
 			arr[i] = [...current];
 			arr[i][empty[i]] = subject;
 		    scores.push(computeMove(arr[i], depth));
-			// console.log('computing', arr[i], subject, depth);
 		}
 	}
 	let best = '';
@@ -133,6 +148,43 @@ function min(arr) {
 	return selection;
 }
 
+function terminal(x) {
+	const player = [machine, user];
+	let temp = [...field];
+	for (let i = 0; i < 2; i++) {
+		temp[x] = player[i];
+		if (checkWin(temp, player[i], null, true, x)) {return true;}
+	}
+	return false
+}
+
+function checkRowsColumns(testField) {
+	const rowsColumns = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8]];
+	let arr = getMachine(testField);
+	let move;
+	if (arr.length >= 1 && arr.length <= 3) {
+		arr.forEach(function(el) {
+			for (let i = 0; i < rowsColumns.length; i++) {
+				let x = rowsColumns[i].indexOf(el);
+				if (x !== -1) {
+					let temp = rowsColumns[i];
+					temp.splice(x, 1);
+					if (typeof testField[temp[0]] === 'number' && typeof testField[temp[1]] === 'number') {move = (temp[0]); return;}
+				}
+			}
+		});
+	return move;
+	}
+}
+
+function getMachine(testField) {
+	let task = [];
+	testField.forEach(function(el, i) {
+		if (el === machine) {task.push(i);}
+	});
+	return(task);
+}
+
 function checkWin(testField, subject, who, isAI, move, depth) {
 	const wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 	let test = [];
@@ -149,9 +201,8 @@ function checkWin(testField, subject, who, isAI, move, depth) {
 				return true;
 			}
 			else if (c === 3 && isAI === true) {
-				// console.log (subject, 'AI Win', move, testField, depth);
-				if (subject === machine) {return {index: move, score: 10};}
-				else {return {index: move, score: -10};}
+				if (subject === machine) {return {index: move, score: 10, result: 'terminal'};}
+				else {return {index: move, score: -10, result: 'terminal'};}
 			}
 		}
 	}
@@ -173,8 +224,8 @@ function win(who, winArr) {
 	let text = '', color = '';
 	resetButton.style.display = 'none';
 	banners.style.display = 'none';
-	if (who === 'user') {color = '#2ad61d', text = 'YOU WIN!!!'; console.log('you win');}
-	else {color = '#ff2100', text = 'MACHINE WINS!!!'; console.log('machine wins')}
+	if (who === 'user') {color = '#2ad61d', text = 'YOU WIN!!!';}
+	else {color = '#ff2100', text = 'MACHINE WINS!!!';}
 	h2.innerText =  text; 
 	winArr.forEach(function(el) {
 		blocks[el].style.backgroundColor = color;
@@ -186,7 +237,6 @@ function win(who, winArr) {
 }
 
 function gameTie() {
-	console.log('tie');
 	resetButton.style.display = 'none';
 	banners.style.display = 'none';
 	h2.innerText = 'IT IS A TIE!!!';
