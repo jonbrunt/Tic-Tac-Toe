@@ -119,7 +119,6 @@ function max(arr) {
 	let highScore = -10000;
 	let selection;
 	for (i = 0; i < arr.length; i++) {
-		if (arr[i].score === -100) {selection = arr[i]; return selection;}
 		if (arr[i].score > highScore) {highScore = arr[i].score, selection = arr[i];}
 	}
 	return selection;
@@ -129,7 +128,6 @@ function min(arr) {
 	let lowScore = 10000;
 	let selection;
 	for (i = 0; i < arr.length; i++) {
-		if (arr[i].score === 100) {selection = arr[i]; return selection;}
 		if (arr[i].score < lowScore) {lowScore = arr[i].score; selection = arr[i];}
 	}
 	return selection;
