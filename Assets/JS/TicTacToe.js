@@ -52,7 +52,6 @@ function selectBlock(event) {
 	event.target.innerText = player;
 	field[event.target.id] = player;
 	blocks[event.target.id].removeEventListener('click', selectBlock);
-	console.log(field);
 	if (!checkWin(field, player, 'user', false) && !checkTie(field, false)) {machinePlays();}
 }
 
@@ -77,7 +76,6 @@ function machinePlays() {
 	field[x] = player;
 	blocks[x].innerText = player;
 	blocks[x].removeEventListener('click', selectBlock);
-	console.log(field);
 	if (!checkWin(field, player, 'machine', false)) {checkTie(field, false);}
 }
 
