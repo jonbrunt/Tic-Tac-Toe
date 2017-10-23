@@ -59,14 +59,12 @@ function machinePlays() {
 	player = machine;
 	let x;
 	let empty = getEmpty(field);
-	if ((empty.length === 8) && (field[0] === user || field[2] === user || field[6] === user || field[8] === user)) {
+	if ((empty.length === 8) && (field[4] === user)) {
+		x = 0; 
+	} 	else if (empty.length === 8) {
 		x = 4;
-	}	else if ((empty.length === 8) && (field[4] === user)) {
+	}	else if (empty.length === 6 && field[1] === user && field[3] === user) {
 		x = 0;
-	}	else if (empty.length === 6 && checkDiagonals(1) !== false) {
-		x = checkDiagonals(1);
-	} 	else if (empty.length === 6 && checkDiagonals(2) !== false) {
-		x = checkDiagonals(2);
 	} 	else {
 		x = (computeMove(field, 0).index);
 		if (!terminal(x) && (typeof checkRowsColumns(field) === 'number')) {
@@ -85,15 +83,6 @@ function getEmpty(testField) {
 		if (typeof el === 'number') {task.push(i);}
 	});
 	return(task);
-}
-
-function checkDiagonals(num) {
-	if (num === 1) {
-		if ((field[0] === user && field[8] === user) || (field[2] === user && field[6] === user)) return 3;
-	} else if (num === 2) {
-		if ((field [1] === user || field[7] === user) && (field[3] === user || field[5] === user)) return 4;
-	}
-	return false;
 }
 
 function computeMove(current, d) {
