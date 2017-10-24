@@ -5,7 +5,7 @@ const blocks = document.querySelectorAll('td');
 const xButton = document.querySelector('#x');
 const oButton = document.querySelector('#o');
 const h2 = document.querySelector('h2');
-const resetButton = document.querySelector('#reset')
+const resetButton = document.querySelector('#reset');
 let user = '', machine = '', player = 'user', field = [...newField];
 
 init();
