@@ -92,6 +92,10 @@ button:hover {
 	display: none;
 }
 
+p {
+	padding: 20px 20px 0;
+}
+
 @media (max-width: 600px) {
 
 	h1 {
@@ -115,8 +119,5 @@ button:hover {
 	h2 {
 		font-size: 2.1em;
 	}
-	
-	button {
-		background-color: #dddddd;
-	}
+
 }
