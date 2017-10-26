@@ -182,7 +182,7 @@ function checkRowsColumns(testField) {
 					let temp = rowsColumns[i]; //assigns temp to be the row or column array determined to be occupied
 					temp.splice(x, 1); //removes occupied index
 					//checks if index of other two blocks in row or column on the playing field are empty (a number)
-					if (typeof testField[temp[0]] === 'number' && typeof testField[temp[1]] === 'number') {move = (temp[0]); return;}
+					if (typeof testField[temp[0]] === 'number' && typeof testField[temp[1]] === 'number') {move = (temp[1]); return;}
 				}
 			}
 		});
