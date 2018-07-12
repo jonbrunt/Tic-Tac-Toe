@@ -1,2 +1,2 @@
-# Tic_Tac_Toe
-A Tic-Tac-Toe app wherein the user plays the computer. It is written in plain HTML, CSS, and vanilla JS. The app allows the user to choose X's or O's, the option to reset during the game, automatic reset after a game over/results viewing period, and the computer playing against the user "smartly" via AI. The AI is implemented using a variation of the minimax algorithm theory, and basic logic.
+# Tic-Tac-Toe
+A Tic-Tac-Toe app for the user versus the computer. It is written in plain HTML, CSS, and vanilla JavaScript. The app allows the user to choose X's or O's, the option to reset during the game, automatic reset after a game over and results viewing period. Basic artificial intelligence is implemented to make the game "unbeatable". The AI is implemented using a variation of minimax algorithm theory, and other basic logic.
